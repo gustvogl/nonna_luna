@@ -1,0 +1,356 @@
+/* --- 1. Importação de Fontes (Contraste Elegante) --- */
+/* 'Playfair Display' para títulos (Serifa elegante) e 'Outfit' para textos (Sans-serif limpa) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+
+/* --- 2. Variáveis & Reset Minimalista --- */
+:root {
+    --bg-color: #FAF7F2;      /* Creme claro (cor de massa crua) */
+    --text-primary: #2C2C2C;    /* Cinza chumbo quase preto */
+    --text-secondary: #666666;  /* Cinza médio para descrições */
+    --accent-color: #D32F2F;    /* Vermelho tomate profundo e rico */
+    --line-color: #E5E0D8;      /* Cor sutil para linhas divisórias */
+    
+    --font-title: 'Playfair Display', serif;
+    --font-body: 'Outfit', sans-serif;
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Curva de animação suave */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 100%; scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita rolagem lateral durante animações */
+}
+
+/* --- 3. KEYFRAMES (O Motor das Animações) --- */
+
+/* Entrada suave vindo de baixo */
+@keyframes fadeInUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Flutuação contínua para a imagem hero */
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Pulso sutil para o WhatsApp */
+@keyframes softPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(211, 47, 47, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+}
+
+/* Classes Utilitárias de Animação */
+.fade-in { animation: fadeInUp 1s ease forwards; }
+/* 'forwards' garante que o elemento fique visível após animar */
+.fade-up { 
+    opacity: 0; /* Começa invisível */
+    animation: fadeInUp 0.8s ease forwards; 
+}
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+
+.floating-img {
+    animation: gentleFloat 6s ease-in-out infinite;
+    /* Sombra suave para dar profundidade */
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); 
+}
+
+.pulse {
+    animation: softPulse 2s infinite;
+    border-radius: 50%;
+}
+
+
+/* --- 4. Estilos Base (Mobile First) --- */
+
+/* Header Minimalista */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.logo span { color: var(--accent-color); } /* O ponto vermelho */
+
+.menu-links { list-style: none; }
+
+.menu-links a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Animação de sublinhado no menu */
+.hover-line::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: var(--transition-smooth);
+}
+.hover-line:hover::after { width: 100%; }
+
+
+/* Banner / Hero Section */
+.banner {
+    min-height: 85vh; /* Ocupa boa parte da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5%;
+    margin-bottom: 4rem;
+}
+
+.banner h1 {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.banner p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-container {
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 450px;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+}
+
+/* Botão Sofisticado */
+.botao {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--accent-color);
+}
+
+.botao:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    transform: translateY(-5px); /* Levanta ligeiramente */
+    box-shadow: 0 10px 20px -10px rgba(211, 47, 47, 0.5);
+}
+
+
+/* Cardápio Minimalista */
+.cardapio {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 5%;
+}
+
+.cardapio h2 {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.cardapio-categoria {
+    font-family: var(--font-title);
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    margin: 3rem 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line-color);
+    display: inline-block;
+}
+
+/* Layout Flex para os itens do menu */
+.cardapio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinha no topo caso a descrição seja longa */
+    padding: 1.5rem 0;
+    border-bottom: 1px solid transparent; /* Borda invisível para evitar pulo no hover */
+    transition: var(--transition-smooth);
+}
+
+.cardapio-item:hover {
+    border-bottom-color: var(--line-color);
+    transform: translateX(10px); /* Desliza sutilmente para a direita */
+}
+
+.item-info {
+    padding-right: 1.5rem;
+}
+
+.nome {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.descricao {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+.item-preco {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    white-space: nowrap; /* Impede que o preço quebre linha */
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 5rem 1rem;
+    background-color: #fff;
+    border-top: 1px solid var(--line-color);
+    margin-top: 4rem;
+}
+
+/* --- Novo Estilo do Header com Logo --- */
+
+/* Wrapper que segura Imagem e Texto */
+.logo-wrapper {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    gap: 1rem; /* Espaço entre a imagem e o nome */
+}
+
+/* Configuração da Imagem da Logo */
+.logo-img {
+    height: 8.5rem; /* Altura controlada para não estourar o header */
+    width: auto;    /* Largura automática para não distorcer */
+    object-fit: contain;
+    
+    /* Opcional: Animação suave na logo */
+    transition: transform 0.4s ease;
+}
+
+.logo-wrapper:hover .logo-img {
+    transform: rotate(-10deg); /* Efeito divertido ao passar o mouse */
+}
+
+/* Ajuste do Texto (agora .logo-text em vez de apenas .logo) */
+.logo-text {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin: 0; /* Remove margens padrão para alinhar melhor */
+}
+
+.logo-text span { color: var(--accent-color); }
+
+/* Ajuste para Mobile (se a tela for muito pequena) */
+@media (max-width: 400px) {
+    .logo-text {
+        font-size: 1.2rem; /* Diminui o texto se a tela for minúscula */
+    }
+    .logo-img {
+        height: 2.5rem;
+    }
+}
+
+footer p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+footer .small { font-size: 0.85rem; opacity: 0.7; }
+
+/* WhatsApp */
+.link-whatsapp {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background-color: #25D366; /* Cor oficial do WhatsApp */
+    border-radius: 50%;
+    padding: 0.8rem;
+    display: flex;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.link-whatsapp img { width: 2.5rem; height: 2.5rem; display: block; }
+
+
+/* --- 5. Media Queries (Desktop) --- */
+@media (min-width: 900px) {
+    .banner {
+        flex-direction: row; /* Fica lado a lado */
+        text-align: left;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto 6rem auto;
+        min-height: 90vh;
+    }
+
+    .banner .coluna:first-child {
+        width: 50%;
+        padding-right: 3rem;
+        align-items: flex-start;
+    }
+    
+    .image-container {
+        width: 45%;
+        margin-top: 0;
+    }
+
+    .banner h1 { font-size: 4.5rem; }
+    .banner p { margin-left: 0; font-size: 1.3rem;}
+
+    /* No desktop, o botão se alinha à esquerda */
+    .banner .coluna { display: flex; flex-direction: column; align-items: flex-start; }
+}
